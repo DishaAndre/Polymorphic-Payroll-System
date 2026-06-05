@@ -3,63 +3,63 @@
 using namespace std;
 
 // Base Employee Class
-class Employee {
+class employee {
 public:
     string name;
     int id;
 
     // Default constructor
-    Employee() {
+    employee() {
         name = "Unknown";
         id = 0;
     }
 
     // Virtual function for salary
-    virtual double calculateSalary() {
+    virtual double calculate_Salary() {
         return 0.0;
     }
 
     // Virtual destructor
-    virtual ~Employee() {}
+    virtual ~employee() {}
 };
 
 // Hourly Employee Class
-class HourlyEmployee : public Employee {
+class hourly_employee : public employee {
 public:
     double rate;
     double hours;
 
-    HourlyEmployee(string n, int i, double r, double h) {
+    hourly_employee(string n, int i, double r, double h) {
         name = n;
         id = i;
         rate = r;
         hours = h;
     }
 
-    double calculateSalary() override {
+    double calculate_Salary() override {
         return rate * hours;
     }
 };
 
 // Salaried Employee Class
-class SalariedEmployee : public Employee {
+class salaried_employee : public employee {
 public:
-    double monthlySalary;
+    double monthly_salary;
 
-    SalariedEmployee(string n, int i, double s) {
+    salaried_employee(string n, int i, double s) {
         name = n;
         id = i;
-        monthlySalary = s;
+        monthly_salary = s;
     }
 
-    double calculateSalary() override {
-        return monthlySalary;
+    double calculate_Salary() override {
+        return monthly_salary;
     }
 };
 
 // Main Function
 int main() {
-    Employee* staff[10]; 
+    employee* staff[10]; 
     int count = 0;
     int choice = 0;
 
@@ -79,21 +79,21 @@ int main() {
             string n; int i; double r, h;
             cout << "Enter Name, ID, Hourly Rate, Hours Worked: ";
             cin >> n >> i >> r >> h;
-            staff[count] = new HourlyEmployee(n, i, r, h);
+            staff[count] = new hourly_employee(n, i, r, h);
             count = count + 1;
         } 
         else if (choice == 2) {
             string n; int i; double s;
             cout << "Enter Name, ID, Monthly Salary: ";
             cin >> n >> i >> s;
-            staff[count] = new SalariedEmployee(n, i, s);
+            staff[count] = new salaried_employee(n, i, s);
             count = count + 1;
         }
     }
 
     cout << "\nID\tName\tSalary" << endl;
     for (int i = 0; i < count; i++) {
-        cout << staff[i]->id << "\t" << staff[i]->name << "\t" << staff[i]->calculateSalary() << endl;
+        cout << staff[i]->id << "\t" << staff[i]->name << "\t" << staff[i]->calculate_Salary() << endl;
     }
 
     for (int i = 0; i < count; i++) {
@@ -102,3 +102,4 @@ int main() {
 
     return 0;
 }
+
